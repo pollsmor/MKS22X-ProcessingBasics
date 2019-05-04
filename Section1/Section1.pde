@@ -8,48 +8,61 @@ Visualizer v;
  */
 class Visualizer {
   float x, y;
+  int bars;
   float [] values;
   float [] speeds;
-  Visualizer(float x, float y) {
+  Visualizer(float x, float y, int bars) {
     this.x = x;
     this.y = y;
-    values = new float[10];
-    speeds = new float[10];
+    this.bars = bars;
+    values = new float[bars];
+    speeds = new float[bars];
     for (int i = 0; i < values.length; i++) {
       values[i] = random(-99, 99);
       speeds[i] = random(2);
     }
+    
+    values[0] = 1.0;
+    values[1] = -2.0;
+    values[2] = 4.0;
+    values[3] = -8.0;
+    values[4] = 16.0;
+    values[5] = -32.0;
+    values[6] = 48.0;
+    values[7] = -64.0;
+    values[8] = 80.0;
+    values[9] = -96.0;
   }
 
   void display() {
-    //draw the bars equally spaced inside this box. 
-    //You can assume 10, but it would be even better 
-    //if you could modify it to be larger increments.
+    //Use this to adjust size of main rectangle
+    int length = 400;
+    int width = 200;
     fill(255);
-    rect(x, y, 400, 200);
-    //This is a 200x400 box.
-    //The width of the visualizer is 400! This rect is the border
+    rect(x, y, length, width);
+    
+    //Middle dividing line
+    float lineY = width / 2;
+    line(x, lineY, x + length, lineY);
 
-    //the line is the 0 y-value, the top is 100, the bottom is -100
-    line(x, y+100, x+400, y+100);
-
-    //You need to use a loop. You need to make the HEIGHT of the bars 
-    //the values in the array.
-    //Negative values are red, and go below the line.
-    //Positive values are green and go above the line.
-
-    //???WRITE THIS METHOD FIRST!!!
-    //THESE ARE WRONG: They just illustrate how they could look
-    fill(255, 0, 0);
-    rect(x+40, y+100, 60, 50);
-    fill(0, 255, 0);
-    rect(x+120, y+50, 60, 50);
-
-
-    //Width of the visualizer is 400!
-
-  
+    float barWidth = length / bars;
+    float barX = x; //to track where on the x-axis the bar is
+    
+    for (int i = 0; i < values.length; ++i) {
+      if (Math.abs(values[i]) == values[i]) { //positive 
+        fill(0, 255, 0); //green
+        rect(barX, lineY - values[i], barWidth, values[i]); //starting point is the top left
+      }
+      
+      else { //negative
+        fill(255, 0, 0); //red
+        rect(barX, lineY, barWidth, values[i]); //starting point is the middle left
+      }
+      
+      barX += barWidth; //move along the x-axis
+    }
   }
+    
   void update() {
     //???WRITE THIS METHOD SECOND!!!
     for (int i = 0; i < values.length; i++) {
@@ -65,7 +78,7 @@ class Visualizer {
 
 void setup() {
   size(600, 500);
-  v = new Visualizer(20, 20);
+  v = new Visualizer(20, 20, 10);
 }
 void draw() {
   background(255);
