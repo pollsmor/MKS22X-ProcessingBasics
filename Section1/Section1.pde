@@ -29,17 +29,20 @@ class Visualizer {
     line(x, lineY, x + length, lineY);
 
     float barX = x; //to track where on the x-axis the bar is
-    fill(0, 0, 255);
-    rect(barX, lineY, barWidth, 60);
     
     for (int i = 0; i < values.length; ++i) {
-      if (values[i] > 0)
+      if (values[i] >= 50 && values[i] <= 100) //green
         fill(0, 255, 0);
         
-      else
+      else if (values[i] >= 0 && values[i] < 50) //yellow
+        fill(255, 255, 0);
+        
+      else if (values[i] >= -50 && values[i] < 0) //orange
+        fill(255, 165, 0);
+        
+      else //red
         fill(255, 0, 0);
        
-      fill(0, 255, 0); //green
       rect(barX, lineY, barWidth, - values[i]); //starting point is the top left
       
       barX += barWidth; //move along the x-axis
@@ -49,7 +52,7 @@ class Visualizer {
   void update() {
     for (int i = 0; i < values.length; ++i) {
       if (lineY - values[i] < y || lineY - values[i] > y + width)
-        speeds[i] = - speeds[i];
+        speeds[i] = - speeds[i]; //reverse speeds
       
       values[i] += speeds[i];
     }
