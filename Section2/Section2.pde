@@ -60,10 +60,10 @@ void koch(int levels, float x1, float y1, float x2, float y2) {
   stroke(255, 0, 0);
   line(x1, y1, x2, y2);
   
-  float middleLeftX = (x2 - x1) * (1/3);
-  float middleLeftY = (y2 - y1) * (1/3);
-  float middleRightX = (x2 - x1) * (2/3);
-  float middleRightY = (y2 - y1) * (2/3);
+  float middleLeftX = (x2 + x1) / 3;
+  float middleLeftY = (y2 + y1) / 3;
+  float middleRightX = (x2 + x1) * 2 / 3;
+  float middleRightY = (y2 + y1) * 2 / 3;
   
   stroke(0, 255, 0);
   line(middleLeftX, middleLeftY, middleRightX, middleRightY);
@@ -79,9 +79,9 @@ void draw() {
   fill(255);
   text("Click the mouse to increase levels, press a key to decrease levels",20,20);
 
-  //gasket(levels, 0, height - 10, width, height - 10, width / 2, 10);
+  gasket(levels, 0, height - 10, width, height - 10, width / 2, 10);
 
-  koch(levels, width - 10, height / 2, 10, height / 3 ); 
+  //koch(levels, width - 10, height / 2, 10, height / 3 ); 
 }
 
 void mouseClicked(){ 
