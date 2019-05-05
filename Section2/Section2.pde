@@ -52,16 +52,36 @@ void gasket(int levels, float v1x, float v1y, float v2x, float v2y, float v3x, f
   gasket(levels - 1, topv1x, topv1y, topv2x, topv2y, topv3x, topv3y);
 }
 
+void koch(int levels, float x1, float y1, float x2, float y2) {
+  rectMode(CORNERS);
+  fill(255);
+  rect(x1, y1, x2, y2);
+  
+  stroke(255, 0, 0);
+  line(x1, y1, x2, y2);
+  
+  float middleLeftX = (x2 - x1) * (1/3);
+  float middleLeftY = (y2 - y1) * (1/3);
+  float middleRightX = (x2 - x1) * (2/3);
+  float middleRightY = (y2 - y1) * (2/3);
+  
+  stroke(0, 255, 0);
+  line(middleLeftX, middleLeftY, middleRightX, middleRightY);
+}
+
+double distance(float x1, float y1, float x2, float y2) {
+  return Math.sqrt( (x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1) );
+}
+
 void draw() { 
   background(50);  
   
   fill(255);
   text("Click the mouse to increase levels, press a key to decrease levels",20,20);
 
-  gasket(levels,0, height-10, width, height-10, width/2, 10);
+  //gasket(levels, 0, height - 10, width, height - 10, width / 2, 10);
 
- //koch(levels,width-10, height/2,10, height/3 ); 
- //other fractal you can do! This requires a bit more math, or you can look up the coordinates.
+  koch(levels, width - 10, height / 2, 10, height / 3 ); 
 }
 
 void mouseClicked(){ 
