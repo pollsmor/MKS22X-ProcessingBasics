@@ -3,23 +3,15 @@ color bg,fg;
 
 void setup() {
   size(800, 600);
-  levels = 3;
+  levels = 0;
 }
 
-/*Create Sierpiski's Gasket (google an image of this)
-  The outer triangle are the vertices: (v1x, v1y), (v2x,v2y), (v3x, v3y): bottom left, bottom right, top
-  levels:
-  0 = regular triangle
-  1 = triforce (looks like 3 triangles)
-  2 = each of the 3 triangles will be cut into 3 triangles.
-  etc.
-*/
 void gasket(int levels, float v1x, float v1y, float v2x, float v2y, float v3x, float v3y) {
+  fill(255, 0, 0); //red
+  triangle(v1x, v1y, v2x, v2y, v3x, v3y); //original red triangle
+  
   if (levels == 0) 
     return;
-    
-  fill(255, 0, 0); //red
-  triangle(v1x, v1y, v2x, v2y, v3x, v3y);
    
    //White cutout
   fill(255); //white
@@ -45,13 +37,13 @@ void gasket(int levels, float v1x, float v1y, float v2x, float v2y, float v3x, f
   float bottomRightv2x = v2x;
   float bottomRightv2y = v2y;
   float bottomRightv3x = topRightX;
-  float bottomRightv3y = topRightX;
+  float bottomRightv3y = topRightY;
   
   //Top triangle
   float topv1x = topLeftX;
   float topv1y = topLeftY;
   float topv2x = topRightX;
-  float topv2y = topRightX;
+  float topv2y = topRightY;
   float topv3x = v3x;
   float topv3y = v3y;
   
@@ -61,7 +53,7 @@ void gasket(int levels, float v1x, float v1y, float v2x, float v2y, float v3x, f
 }
 
 void draw() { 
-  background(255);  
+  background(50);  
   
   fill(255);
   text("Click the mouse to increase levels, press a key to decrease levels",20,20);
