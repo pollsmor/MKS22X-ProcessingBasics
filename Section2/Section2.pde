@@ -15,14 +15,23 @@ void setup() {
   etc.
 */
 void gasket(int levels, float v1x, float v1y, float v2x, float v2y, float v3x, float v3y) {
-    //YOU WRITE THIS METHOD!
+  fill(255, 0, 0);
+  triangle(v1x, v1y, v2x, v2y, v3x, v3y);
+  fill(255);
+  float bottomX = (v1x + v2x) / 2;
+  float bottomY = v1y;
+  float topLeftX = (v1x + bottomX) / 2;
+  float topLeftY = (v1y + v3y) / 2;
+  float topRightX = (bottomX + v2x) / 2;
+  float topRightY = topLeftY;
+  triangle(bottomX, bottomY, topLeftX, topLeftY, topRightX, topRightY);
 }
 
 void draw() { 
   background(50);  
   
   fill(255);
-  text("Click the mouse to increase levels, press a key to decrease levles",20,20);
+  text("Click the mouse to increase levels, press a key to decrease levels",20,20);
 
   gasket(levels,0, height-10, width, height-10, width/2, 10);
 
