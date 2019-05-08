@@ -61,7 +61,7 @@ class Visualizer {
 
 void setup() {
   size(600, 500);
-  v = new Visualizer(20, 20, 10);
+  v = new Visualizer(20, 20, 40);
 }
 
 void draw() {
